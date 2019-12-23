@@ -14,7 +14,7 @@ namespace Calculator
             while (keepGoing)
             {
                 // Ask the user to enter numbers
-                Console.WriteLine("Enter a list of numbers to add together. Seperate each number with a comma");
+                Console.WriteLine("Enter a list of numbers to add together. Seperate each number with a comma or new line characters");
                 userInput = Console.ReadLine();
 
                 // Return answer to the user
@@ -29,12 +29,15 @@ namespace Calculator
 
         public static int AddNumbers(string userInput)
         {
+
             int sum = 0;
+            string[] numStrings = Array.Empty<string>();
 
             if (userInput.Length != 0)
             {
-                //Split the string at the commas
-                string[] numStrings = userInput.Split(',');
+                //Split the string at the commas and new line characters
+                numStrings = userInput.Split(new string[] { ",", "\\n" }, StringSplitOptions.RemoveEmptyEntries);
+
                 foreach (string argument in numStrings)
                 {
                     int num = 0;
