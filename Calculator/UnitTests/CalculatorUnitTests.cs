@@ -68,5 +68,17 @@ namespace Calculator
             //Assert
             Assert.AreEqual(sum, 1);
         }
+        [Test]
+        public void TestCalculator_MoreThanTwoValues()
+        {
+            //Arrange
+            string input = "1,3,5,NaN,6,NaN";
+
+            //Act
+            int sum = CalculatorApp.AddNumbers(input);
+
+            //Assert
+            Assert.AreEqual(sum, 15);
+        }
     }
 }
