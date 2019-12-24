@@ -12,7 +12,7 @@ namespace Calculator
             string input = "";
 
             //Act
-            int sum = CalculatorApp.AddNumbers(input);
+            int sum = CalculatorApp.Calculate(input);
 
             //Assert
             Assert.AreEqual(sum, 0);
@@ -25,7 +25,7 @@ namespace Calculator
             string input = "1,5";
 
             //Act
-            int sum = CalculatorApp.AddNumbers(input);
+            int sum = CalculatorApp.Calculate(input);
 
             //Assert
             Assert.AreEqual(sum, 6);
@@ -38,7 +38,7 @@ namespace Calculator
             string input = "7";
 
             //Act
-            int sum = CalculatorApp.AddNumbers(input);
+            int sum = CalculatorApp.Calculate(input);
 
             //Assert
             Assert.AreEqual(sum, 7);
@@ -51,7 +51,7 @@ namespace Calculator
             string input = "NaN, 3";
 
             //Act
-            int sum = CalculatorApp.AddNumbers(input);
+            int sum = CalculatorApp.Calculate(input);
 
             //Assert
             Assert.AreEqual(sum, 3);
@@ -64,7 +64,7 @@ namespace Calculator
             string input = "1, NaN";
 
             //Act
-            int sum = CalculatorApp.AddNumbers(input);
+            int sum = CalculatorApp.Calculate(input);
 
             //Assert
             Assert.AreEqual(sum, 1);
@@ -77,7 +77,7 @@ namespace Calculator
             string input = "1,3,5,NaN,6,NaN";
 
             //Act
-            int sum = CalculatorApp.AddNumbers(input);
+            int sum = CalculatorApp.Calculate(input);
 
             //Assert
             Assert.AreEqual(sum, 15);
@@ -90,7 +90,7 @@ namespace Calculator
             string input = "3\\n5,6\\n1";
 
             //Act
-            int sum = CalculatorApp.AddNumbers(input);
+            int sum = CalculatorApp.Calculate(input);
 
             //Assert
             Assert.AreEqual(sum, 15);
@@ -102,10 +102,23 @@ namespace Calculator
             string input = "-3,4,5";
 
             //Act 
-            var exception = Assert.Throws<ArgumentException>(() => CalculatorApp.AddNumbers(input));
+            var exception = Assert.Throws<ArgumentException>(() => CalculatorApp.Calculate(input));
 
             //Assert
             Assert.AreEqual(exception.Message, "Cannot enter negative numbers. Invalid values: -3");
+        }
+
+        [Test]
+        public void TestCalculator_GreaterThanOneThousand()
+        {
+            //Arrange
+            string input = "5,1004,9\\n2";
+
+            //Act
+            int sum = CalculatorApp.Calculate(input);
+
+            //Assert
+            Assert.AreEqual(sum, 16);
         }
     }
 }
