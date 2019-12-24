@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Calculator
@@ -32,6 +33,7 @@ namespace Calculator
 
             int sum = 0;
             string[] numStrings = Array.Empty<string>();
+            List<int> negativeNumbers = new List<int>();
 
             if (userInput.Length != 0)
             {
@@ -48,9 +50,20 @@ namespace Calculator
                     //If value is a number, add it to the sum
                     if (success)
                     {
-                        sum += num;
+                        if (num < 0)
+                        {
+                            negativeNumbers.Add(num);
+                        }
+                        else
+                        {
+                            sum += num;
+                        }                        
                     }
                 }
+            }
+            if (negativeNumbers.Any())
+            {
+                throw new ArgumentException($"Cannot enter negative numbers. Invalid values: {string.Join(",", negativeNumbers.ToArray())}");
             }
             return sum;
         }

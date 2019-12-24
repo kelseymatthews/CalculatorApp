@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 
 namespace Calculator
 {
@@ -93,6 +94,18 @@ namespace Calculator
 
             //Assert
             Assert.AreEqual(sum, 15);
+        }
+        [Test]
+        public void TestCalculator_NegativeNumber()
+        {
+            //Arrange
+            string input = "-3,4,5";
+
+            //Act 
+            var exception = Assert.Throws<ArgumentException>(() => CalculatorApp.AddNumbers(input));
+
+            //Assert
+            Assert.AreEqual(exception.Message, "Cannot enter negative numbers. Invalid values: -3");
         }
     }
 }
