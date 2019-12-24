@@ -146,5 +146,18 @@ namespace Calculator
             //Assert
             Assert.AreEqual(sum, 6);
         }
+
+        [Test]
+        public void TestCalculator_CustomMultipleCharacterDelimiter()
+        {
+            //Arrange
+            string input = "//[test]\\n3test3test1,1";
+
+            //Act
+            int sum = Calculator.Calculate(input);
+
+            //Assert
+            Assert.AreEqual(sum, 8);
+        }
     }
 }

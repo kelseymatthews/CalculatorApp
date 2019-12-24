@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Calculator
 {
@@ -67,13 +68,29 @@ namespace Calculator
 
         private static void ManageCustomDelimiter(string userInput, List<string> delimiters)
         {
-            string customDelimiter = userInput[2].ToString();
+            Console.WriteLine(userInput[2]);
+            string customDelimiter = "";
+
+            //User is entering a custom delimiter of more than one character
+            if (userInput[2].ToString().Equals("["))
+            {
+                customDelimiter = userInput.Split('[', ']')[1];
+                //Remove section of string where user sets delimiter
+                userInput = userInput.Substring(userInput.IndexOf("]", StringComparison.Ordinal) + 3);
+            }
+            //User is entering a one character custom delimiter
+            else
+            {
+                customDelimiter = userInput[2].ToString();
+                //Remove section of string where user sets delimiter
+                userInput = userInput.Substring(5);
+            }
 
             //Add custom delimiter to existing list
             delimiters.Add(customDelimiter);
 
-            //Remove section of string where user sets delimiter
-            userInput = userInput.Substring(5);
+            
+            
 
             //Remove characters in cases where user selects a number as a custom delimiter
             var numDelimiter = int.TryParse(customDelimiter, out _);

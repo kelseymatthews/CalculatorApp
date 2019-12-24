@@ -16,7 +16,7 @@ namespace Calculator
                 Console.WriteLine($"Welcome to the addition app! {Environment.NewLine}" +
                     $"----------------------------------------- {Environment.NewLine}" +
                     $"Enter a dilimiter of your choice followed by a list of numbers {Environment.NewLine}" +
-                    $"Use the following format: //(delimiter)\\n(numbers)// {Environment.NewLine}" +
+                    $"Use the following format: //[delimiter]\\n(numbers)// {Environment.NewLine}" +
                     $"----------------------------------------- {Environment.NewLine}" +
                     $"Numbers must be between 0 and 1000");
 
