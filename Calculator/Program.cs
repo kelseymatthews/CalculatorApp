@@ -27,8 +27,12 @@ namespace Calculator
                 Console.WriteLine($"The sum of your numbers is {Calculator.Calculate(userInput)}");
 
                 //Ask user if they continue
-                Console.WriteLine("Press Y To enter new numbers");
-                if (Console.ReadLine().ToLower() != "y") keepGoing = false;
+                Console.WriteLine("Press Ctrl + C to Exit Program");
+                ConsoleKeyInfo input = Console.ReadKey(true);
+                if (input.Modifiers == ConsoleModifiers.Control && input.Key == ConsoleKey.C)
+                {
+                    keepGoing = false;
+                }
 
             }
         }
