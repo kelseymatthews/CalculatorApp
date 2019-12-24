@@ -125,7 +125,7 @@ namespace Calculator
         public void TestCalculator_CustomSingleCharacterDelimiter()
         {
             //Arrange
-            string input = "//g\n2,7g9g4";
+            string input = "//g\\n2,7g9g4";
 
             //Act
             int sum = Calculator.Calculate(input);
@@ -138,7 +138,7 @@ namespace Calculator
         public void TestCalculator_CustomSingleIntegerDelimiter()
         {
             //Arrange
-            string input = "//1\n313";
+            string input = "//1\\n313";
 
             //Act
             int sum = Calculator.Calculate(input);
@@ -158,6 +158,19 @@ namespace Calculator
 
             //Assert
             Assert.AreEqual(sum, 8);
+        }
+
+        [Test]
+        public void TestCalculator_ManyCustomMultipleCharacterDelimiter()
+        {
+            //Arrange
+            string input = "//[test][r][q]\\n4r1test2,1q1";
+
+            //Act
+            int sum = Calculator.Calculate(input);
+
+            //Assert
+            Assert.AreEqual(sum, 9);
         }
     }
 }

@@ -68,39 +68,43 @@ namespace Calculator
 
         private static void ManageCustomDelimiter(string userInput, List<string> delimiters)
         {
-            Console.WriteLine(userInput[2]);
-            string customDelimiter = "";
+            List<string> customDelimiters = new List<string>();
 
             //User is entering a custom delimiter of more than one character
             if (userInput[2].ToString().Equals("["))
             {
-                customDelimiter = userInput.Split('[', ']')[1];
+                foreach (Match match in Regex.Matches(userInput, @"\[(.*?)\]"))
+                {
+                    customDelimiters.Add(match.ToString().Replace("[", "").Replace("]", ""));
+                }
+
                 //Remove section of string where user sets delimiter
-                userInput = userInput.Substring(userInput.IndexOf("]", StringComparison.Ordinal) + 3);
+                userInput = userInput.Substring(userInput.IndexOf("\n", StringComparison.Ordinal) + 1);
             }
             //User is entering a one character custom delimiter
             else
             {
-                customDelimiter = userInput[2].ToString();
+                customDelimiters.Add(userInput[2].ToString());
                 //Remove section of string where user sets delimiter
                 userInput = userInput.Substring(5);
             }
 
             //Add custom delimiter to existing list
-            delimiters.Add(customDelimiter);
-
-            
-            
+            delimiters.AddRange(customDelimiters);            
 
             //Remove characters in cases where user selects a number as a custom delimiter
-            var numDelimiter = int.TryParse(customDelimiter, out _);
-            if (numDelimiter)
+            foreach(string c in customDelimiters)
             {
-                foreach (string d in delimiters)
+                var numDelimiter = int.TryParse(c, out _);
+                if (numDelimiter)
                 {
-                    userInput.Replace(d, "");
+                    foreach (string d in delimiters)
+                    {
+                        userInput.Replace(d, "");
+                    }
                 }
             }
+
         }
     }
 }
